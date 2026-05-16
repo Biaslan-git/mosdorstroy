@@ -10,7 +10,9 @@ export default function Hero() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      requestAnimationFrame(() => {
+        setScrollY(window.scrollY);
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -19,10 +21,11 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[100dvh] flex items-center pt-20 overflow-hidden">
+      {/* Background with parallax - only on desktop */}
       <div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 will-change-transform"
         style={{
-          transform: `translateY(${scrollY * 0.5}px) scale(${1 + scrollY * 0.0005})`,
+          transform: `translateY(${scrollY * 0.3}px)`,
         }}
       >
         <Image
@@ -33,22 +36,12 @@ export default function Hero() {
           priority
         />
       </div>
-      <div
-        className="absolute inset-0 z-0 bg-gradient-to-r from-neutral-900/95 via-neutral-900/80 to-neutral-900/40"
-        style={{
-          transform: `translateY(${scrollY * 0.3}px)`,
-        }}
-      />
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-neutral-900/95 via-neutral-900/80 to-neutral-900/40" />
 
-      <div
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20"
-        style={{
-          transform: `translateY(${scrollY * 0.2}px)`,
-          opacity: Math.max(0, 1 - scrollY / 600),
-        }}
-      >
+      {/* Content - no parallax to avoid flicker on mobile */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 text-orange-400 px-4 py-2 rounded-full text-sm font-medium mb-6 animate-fade-in">
+          <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 text-orange-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
             <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
             Работаем по Москве и МО
           </div>
@@ -81,12 +74,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
-        style={{
-          opacity: Math.max(0, 1 - scrollY / 200),
-        }}
-      >
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <svg className="w-6 h-6 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
