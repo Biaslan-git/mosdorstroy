@@ -1,42 +1,11 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 const basePath = process.env.NODE_ENV === "production" ? "/mosdorstroy" : "";
 
 export default function Hero() {
-  const [scrollY, setScrollY] = useState(0);
-  const [isMobile, setIsMobile] = useState(true);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    const handleScroll = () => {
-      if (!isMobile) {
-        setScrollY(window.scrollY);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", checkMobile);
-    };
-  }, [isMobile]);
-
   return (
     <section className="relative min-h-[100dvh] flex items-center pt-20 overflow-hidden">
-      <div
-        className="absolute inset-0 z-0"
-        style={!isMobile ? { transform: `translateY(${scrollY * 0.3}px)` } : undefined}
-      >
+      <div className="absolute inset-0 z-0">
         <Image
           src={`${basePath}/2.png`}
           alt="Строительная техника"
