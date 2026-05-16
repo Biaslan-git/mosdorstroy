@@ -1,28 +1,10 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useRef } from "react";
 
 const basePath = process.env.NODE_ENV === "production" ? "/mosdorstroy" : "";
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    // Set height once on mount, never update it
-    if (sectionRef.current) {
-      const height = window.innerHeight;
-      sectionRef.current.style.height = `${height}px`;
-      sectionRef.current.style.minHeight = `${height}px`;
-    }
-  }, []);
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative flex items-center pt-20 overflow-hidden"
-      style={{ minHeight: "100vh" }} // Fallback before JS runs
-    >
+    <section className="relative flex items-center pt-20 overflow-hidden min-h-dvh min-h-svh">
       <div className="absolute inset-0 z-0">
         <Image
           src={`${basePath}/2.png`}
