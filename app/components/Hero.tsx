@@ -7,26 +7,35 @@ const basePath = process.env.NODE_ENV === "production" ? "/mosdorstroy" : "";
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
     const handleScroll = () => {
-      requestAnimationFrame(() => {
+      if (!isMobile) {
         setScrollY(window.scrollY);
-      });
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, [isMobile]);
 
   return (
     <section className="relative min-h-[100dvh] flex items-center pt-20 overflow-hidden">
-      {/* Background with parallax - only on desktop */}
       <div
-        className="absolute inset-0 z-0 will-change-transform"
-        style={{
-          transform: `translateY(${scrollY * 0.3}px)`,
-        }}
+        className="absolute inset-0 z-0"
+        style={!isMobile ? { transform: `translateY(${scrollY * 0.3}px)` } : undefined}
       >
         <Image
           src={`${basePath}/2.png`}
@@ -38,7 +47,6 @@ export default function Hero() {
       </div>
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-neutral-900/95 via-neutral-900/80 to-neutral-900/40" />
 
-      {/* Content - no parallax to avoid flicker on mobile */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-2xl">
           <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 text-orange-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
