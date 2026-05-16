@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Header from "./components/Header";
+import Hero from "./components/Hero";
 
 const basePath = process.env.NODE_ENV === "production" ? "/mosdorstroy" : "";
 
@@ -54,87 +56,8 @@ const equipment = [
 export default function Home() {
   return (
     <main className="flex-1">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">М</span>
-              </div>
-              <span className="font-bold text-lg sm:text-xl tracking-tight">МОСДОРСТРОЙ</span>
-            </div>
-            <nav className="hidden md:flex items-center gap-8">
-              <a href="#services" className="text-neutral-600 hover:text-neutral-900 transition-colors">Услуги</a>
-              <a href="#equipment" className="text-neutral-600 hover:text-neutral-900 transition-colors">Техника</a>
-              <a href="#about" className="text-neutral-600 hover:text-neutral-900 transition-colors">О нас</a>
-              <a href="#contacts" className="text-neutral-600 hover:text-neutral-900 transition-colors">Контакты</a>
-            </nav>
-            <a
-              href="tel:+79XXXXXXXXX"
-              className="hidden sm:flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-lg font-medium transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              Позвонить
-            </a>
-          </div>
-        </div>
-      </header>
-
-      {/* Hero */}
-      <section className="relative min-h-screen flex items-center pt-20">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={`${basePath}/2.png`}
-            alt="Строительная техника"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-neutral-900/95 via-neutral-900/80 to-neutral-900/40" />
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 text-orange-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
-              Работаем по Москве и МО
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-              Благоустройство
-              <br />
-              <span className="text-orange-500">и дорожные работы</span>
-            </h1>
-            <p className="text-lg sm:text-xl text-neutral-300 mb-8 leading-relaxed">
-              Профессиональное выполнение земляных и дорожных работ любой сложности.
-              Собственный парк современной техники.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="#contacts"
-                className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:scale-105"
-              >
-                Оставить заявку
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-              <a
-                href="#equipment"
-                className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all border border-white/20"
-              >
-                Наша техника
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg className="w-6 h-6 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </div>
-      </section>
+      <Header />
+      <Hero />
 
       {/* Services */}
       <section id="services" className="py-20 sm:py-32 bg-neutral-50">
@@ -183,8 +106,8 @@ export default function Home() {
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform">
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/80 via-transparent to-transparent sm:opacity-0 sm:group-hover:opacity-100 transition-opacity" />
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:translate-y-full sm:group-hover:translate-y-0 transition-transform">
                   <span className="text-white font-medium">{item.alt}</span>
                 </div>
               </div>
@@ -305,7 +228,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-neutral-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">М</span>
