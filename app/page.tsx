@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+const basePath = process.env.NODE_ENV === "production" ? "/mosdorstroy" : "";
+
 const services = [
   {
     title: "Земляные работы",
@@ -41,12 +43,12 @@ const services = [
 ];
 
 const equipment = [
-  { src: "/6.png", alt: "Экскаватор CAT" },
-  { src: "/2.png", alt: "Бульдозер CASE 2050M" },
-  { src: "/7.png", alt: "Бульдозер CASE" },
-  { src: "/3.png", alt: "Каток HAMM" },
-  { src: "/4.png", alt: "Каток HAMM" },
-  { src: "/1.png", alt: "Каток SAKAI" },
+  { src: `${basePath}/6.png`, alt: "Экскаватор CAT" },
+  { src: `${basePath}/2.png`, alt: "Бульдозер CASE 2050M" },
+  { src: `${basePath}/7.png`, alt: "Бульдозер CASE" },
+  { src: `${basePath}/3.png`, alt: "Каток HAMM" },
+  { src: `${basePath}/4.png`, alt: "Каток HAMM" },
+  { src: `${basePath}/1.png`, alt: "Каток SAKAI" },
 ];
 
 export default function Home() {
@@ -85,7 +87,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center pt-20">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/2.png"
+            src={`${basePath}/2.png`}
             alt="Строительная техника"
             fill
             className="object-cover"
@@ -223,7 +225,7 @@ export default function Home() {
             </div>
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
-                src="/6.png"
+                src={`${basePath}/6.png`}
                 alt="Экскаватор CAT на объекте"
                 fill
                 className="object-cover"
