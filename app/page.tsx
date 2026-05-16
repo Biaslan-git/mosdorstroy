@@ -60,7 +60,7 @@ export default function Home() {
       <Hero />
 
       {/* Services */}
-      <section id="services" className="py-20 sm:py-32 bg-neutral-50">
+      <section id="services" className="relative z-10 py-20 sm:py-32 bg-neutral-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 mb-4">Наши услуги</h2>
@@ -86,7 +86,7 @@ export default function Home() {
       </section>
 
       {/* Equipment */}
-      <section id="equipment" className="py-20 sm:py-32">
+      <section id="equipment" className="relative z-10 py-20 sm:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 mb-4">Наша техника</h2>
@@ -117,7 +117,7 @@ export default function Home() {
       </section>
 
       {/* About */}
-      <section id="about" className="py-20 sm:py-32 bg-neutral-900 text-white">
+      <section id="about" className="relative z-10 py-20 sm:py-32 bg-neutral-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
@@ -159,7 +159,7 @@ export default function Home() {
       </section>
 
       {/* Contacts */}
-      <section id="contacts" className="py-20 sm:py-32">
+      <section id="contacts" className="relative z-10 py-20 sm:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 mb-4">Контакты</h2>
@@ -226,7 +226,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-neutral-900 text-white py-12">
+      <footer className="relative z-10 bg-neutral-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex items-center gap-3">

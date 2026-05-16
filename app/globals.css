@@ -25,3 +25,15 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+@supports (height: 100svh) {
+  :root {
+    --hero-height: 100svh;
+  }
+}
+
+@supports not (height: 100svh) {
+  :root {
+    --hero-height: 100vh;
+  }
+}

@@ -4,8 +4,8 @@ const basePath = process.env.NODE_ENV === "production" ? "/mosdorstroy" : "";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[100svh] flex items-center pt-20 overflow-hidden">
-      <div className="absolute inset-0 z-0">
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      <div className="fixed inset-0 z-0">
         <Image
           src={`${basePath}/2.png`}
           alt="Строительная техника"
@@ -13,8 +13,8 @@ export default function Hero() {
           className="object-cover"
           priority
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-900/95 via-neutral-900/80 to-neutral-900/40" />
       </div>
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-neutral-900/95 via-neutral-900/80 to-neutral-900/40" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-2xl">
