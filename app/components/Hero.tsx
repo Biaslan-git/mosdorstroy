@@ -1,14 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const basePath = process.env.NODE_ENV === "production" ? "/mosdorstroy" : "";
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
+  const [fixedHeight, setFixedHeight] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    setFixedHeight(window.innerHeight);
+
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
@@ -18,7 +22,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-[80vh] sm:min-h-screen flex items-center pt-20 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative flex items-center pt-20 overflow-hidden"
+      style={{ minHeight: fixedHeight ? `${Math.max(fixedHeight * 0.8, 500)}px` : '80vh' }}
       <div
         className="absolute inset-0 z-0"
         style={{
