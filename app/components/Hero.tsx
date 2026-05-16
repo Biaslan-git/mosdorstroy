@@ -26,6 +26,7 @@ export default function Hero() {
       ref={sectionRef}
       className="relative flex items-center pt-20 overflow-hidden"
       style={{ minHeight: fixedHeight ? `${Math.max(fixedHeight * 0.8, 500)}px` : '80vh' }}
+    >
       <div
         className="absolute inset-0 z-0"
         style={{
