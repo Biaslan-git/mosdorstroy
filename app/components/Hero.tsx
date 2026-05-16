@@ -1,23 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 const basePath = process.env.NODE_ENV === "production" ? "/mosdorstroy" : "";
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
-  const [fixedHeight, setFixedHeight] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const mobile = window.innerWidth < 768 || 'ontouchstart' in window;
-    setIsMobile(mobile);
-    setFixedHeight(window.innerHeight);
-
-    if (mobile) return;
-
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
@@ -26,30 +17,14 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const parallaxBg = isMobile ? {} : {
-    transform: `translateY(${scrollY * 0.5}px) scale(${1 + scrollY * 0.0005})`,
-  };
-
-  const parallaxOverlay = isMobile ? {} : {
-    transform: `translateY(${scrollY * 0.3}px)`,
-  };
-
-  const parallaxContent = isMobile ? {} : {
-    transform: `translateY(${scrollY * 0.2}px)`,
-    opacity: Math.max(0, 1 - scrollY / 600),
-  };
-
-  const parallaxArrow = isMobile ? {} : {
-    opacity: Math.max(0, 1 - scrollY / 200),
-  };
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative flex items-center pt-20 overflow-hidden"
-      style={{ minHeight: fixedHeight ? `${Math.max(fixedHeight * 0.8, 500)}px` : '80vh' }}
-    >
-      <div className="absolute inset-0 z-0" style={parallaxBg}>
+    <section className="relative min-h-[100dvh] flex items-center pt-20 overflow-hidden">
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          transform: `translateY(${scrollY * 0.5}px) scale(${1 + scrollY * 0.0005})`,
+        }}
+      >
         <Image
           src={`${basePath}/2.png`}
           alt="Строительная техника"
@@ -60,15 +35,20 @@ export default function Hero() {
       </div>
       <div
         className="absolute inset-0 z-0 bg-gradient-to-r from-neutral-900/95 via-neutral-900/80 to-neutral-900/40"
-        style={parallaxOverlay}
+        style={{
+          transform: `translateY(${scrollY * 0.3}px)`,
+        }}
       />
 
       <div
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20"
-        style={parallaxContent}
+        style={{
+          transform: `translateY(${scrollY * 0.2}px)`,
+          opacity: Math.max(0, 1 - scrollY / 600),
+        }}
       >
         <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 text-orange-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
+          <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 text-orange-400 px-4 py-2 rounded-full text-sm font-medium mb-6 animate-fade-in">
             <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
             Работаем по Москве и МО
           </div>
@@ -103,7 +83,9 @@ export default function Hero() {
 
       <div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
-        style={parallaxArrow}
+        style={{
+          opacity: Math.max(0, 1 - scrollY / 200),
+        }}
       >
         <svg className="w-6 h-6 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
