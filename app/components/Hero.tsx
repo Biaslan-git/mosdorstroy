@@ -1,16 +1,35 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 const basePath = process.env.NODE_ENV === "production" ? "/mosdorstroy" : "";
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    // Set height once on mount, never update it
+    if (sectionRef.current) {
+      const height = window.innerHeight;
+      sectionRef.current.style.height = `${height}px`;
+      sectionRef.current.style.minHeight = `${height}px`;
+    }
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      <div className="fixed inset-0 z-0">
+    <section
+      ref={sectionRef}
+      className="relative flex items-center pt-20 overflow-hidden"
+      style={{ minHeight: "100vh" }} // Fallback before JS runs
+    >
+      <div className="absolute inset-0 z-0">
         <Image
           src={`${basePath}/2.png`}
           alt="Строительная техника"
           fill
           className="object-cover"
+          sizes="100vw"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-900/95 via-neutral-900/80 to-neutral-900/40" />
