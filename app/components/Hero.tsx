@@ -1,22 +1,26 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const basePath = process.env.NODE_ENV === "production" ? "/mosdorstroy" : "";
 
 export default function Hero() {
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
     const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+    setMounted(true);
   }, []);
 
   return (
     <section
-      className="relative flex items-center pt-20 overflow-hidden"
-      style={{ minHeight: 'calc(var(--vh, 1vh) * 100)' }}
+      className="relative flex items-center overflow-hidden bg-neutral-950"
+      style={{ minHeight: "calc(var(--vh, 1vh) * 100)" }}
     >
-      <div className="absolute inset-0 z-0">
+      {/* Background */}
+      <div className="absolute inset-0">
         <Image
           src={`${basePath}/2.png`}
           alt="Строительная техника"
@@ -25,48 +29,82 @@ export default function Hero() {
           sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-neutral-900/95 via-neutral-900/80 to-neutral-900/40" />
+        <div className="absolute inset-0 bg-neutral-950/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/80 via-neutral-950/40 to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 bg-orange-500/20 border border-orange-500/30 text-orange-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
-            Работаем по Москве и МО
+      {/* Soft ambient glow */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-orange-500/10 rounded-full blur-[150px] pointer-events-none" />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full">
+        <div
+          className={`max-w-2xl transition-all duration-700 ${
+            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
+        >
+          {/* Eyebrow with line */}
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-10 h-px bg-orange-500" />
+            <p className="text-orange-400 text-sm font-medium tracking-widest uppercase">
+              Москва и МО
+            </p>
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+
+          {/* Headline */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.15] tracking-tight mb-6">
             Благоустройство
             <br />
-            <span className="text-orange-500">и дорожные работы</span>
+            и дорожные работы
           </h1>
-          <p className="text-lg sm:text-xl text-neutral-300 mb-8 leading-relaxed">
-            Профессиональное выполнение земляных и дорожных работ любой сложности.
-            Собственный парк современной техники.
+
+          {/* Description */}
+          <p className="text-lg sm:text-xl text-neutral-400 leading-relaxed mb-10 max-w-lg">
+            Профессиональное выполнение работ любой сложности. Собственный парк техники CAT, CASE, HAMM.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+
+          {/* CTAs */}
+          <div className="flex flex-wrap gap-4 mb-16">
             <a
               href="#contacts"
-              className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:scale-105 active:scale-95"
+              className="group inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-400 text-white px-7 py-4 rounded-xl font-semibold transition-all"
             >
               Оставить заявку
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </a>
             <a
               href="#equipment"
-              className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all border border-white/20"
+              className="inline-flex items-center gap-2 text-white/80 hover:text-white px-6 py-4 font-medium transition-colors"
             >
-              Наша техника
+              Смотреть технику
             </a>
+          </div>
+
+          {/* Stats row */}
+          <div className="flex gap-10 pt-8 border-t border-white/10">
+            <div>
+              <div className="text-3xl font-bold text-white">10+</div>
+              <div className="text-sm text-neutral-500 mt-1">единиц техники</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-white">50+</div>
+              <div className="text-sm text-neutral-500 mt-1">проектов</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-white">24/7</div>
+              <div className="text-sm text-neutral-500 mt-1">на связи</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <svg className="w-6 h-6 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <div className="w-5 h-9 rounded-full border-2 border-white/20 flex justify-center pt-2">
+          <div className="w-1 h-2 bg-white/50 rounded-full animate-bounce" />
+        </div>
       </div>
     </section>
   );
